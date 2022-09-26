@@ -1,4 +1,4 @@
-require "user.options"
+require "user.options" -- This will implicitly load lua/user/options.lua
 require "user.keymaps"
 require "user.plugins"
 require "user.autocommands"
@@ -18,5 +18,5 @@ require "user.impatient"
 require "user.illuminate"
 require "user.indentline"
 require "user.alpha"
-require "user.lsp"
+require "user.lsp" -- This will implicitly look for init.lua inside of lua/user/lsp
 require "user.dap"
