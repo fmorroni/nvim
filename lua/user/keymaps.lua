@@ -56,10 +56,11 @@ keymap("v", ">", ">gv", opts)
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts) -- Find Files
+keymap("n", "<leader>ftr", ":Telescope live_grep<CR>", opts) -- Find Text Regex
+keymap("n", "<leader>ftf", ":Telescope grep_string search=<CR>", opts) -- Find Text Fuzzy
+keymap("n", "<leader>fp", ":Telescope projects<CR>", opts) -- Find Projects
+keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts) -- Find Buffer
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
