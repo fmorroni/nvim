@@ -15,6 +15,17 @@ vim.g.mapleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
+keymap("n", "<tab>", ">>", opts)
+keymap("n", "<s-tab>", "<<", opts)
+keymap("v", "<tab>", ">gv", opts)
+keymap("v", "<s-tab>", "<gv", opts)
+keymap("n", "<leader>o", "o<ESC>", opts)
+keymap("n", "<leader>O", "O<ESC>", opts)
+keymap({"n", "i"}, ",;", "<ESC>A;<ESC>", opts)
+keymap("i", ",z", "<", opts)
+keymap("i", ",Z", ">", opts)
+keymap("i", ",,", "<ESC>", opts)
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
