@@ -15,6 +15,7 @@ vim.g.mapleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
+keymap("n", "<c-p>", "<c-i>", opts)
 keymap("n", "<tab>", ">>", opts)
 keymap("n", "<s-tab>", "<<", opts)
 keymap("v", "<tab>", ">gv", opts)
