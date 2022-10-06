@@ -21,3 +21,4 @@ require "user.alpha"
 require "user.lsp" -- This will implicitly look for init.lua inside of lua/user/lsp
 require "user.dap"
 require "user.luasnip"
+require "user.globals"

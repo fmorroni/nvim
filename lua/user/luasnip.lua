@@ -36,11 +36,11 @@ local keymap = vim.keymap.set
 
 -- <c-k> is my expansion key.
 -- This will expand the current item or jump to the next item within the snippet.
-keymap({ "i", "s" }, "<c-k>", function()
-  if luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
-  end
-end, { silent = true })
+-- keymap({ "i", "s" }, "<c-k>", function()
+--   if luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   end
+-- end, { silent = true })
 
 -- <c-j> is my jump backwards key.
 -- This always moves to the previous item within the snippet.

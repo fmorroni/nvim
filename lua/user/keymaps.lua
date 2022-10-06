@@ -73,6 +73,7 @@ keymap("n", "<leader>ftr", ":Telescope live_grep<CR>", opts) -- Find Text Regex
 keymap("n", "<leader>ftf", ":Telescope grep_string search=<CR>", opts) -- Find Text Fuzzy
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts) -- Find Projects
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts) -- Find Buffer
+keymap("n", "<leader>th", ":Telescope help_tags<CR>", opts) -- Open help search
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
