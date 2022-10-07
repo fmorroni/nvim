@@ -5,7 +5,7 @@ if snip_status_ok then
   vim.notify("Everything A-Okay at luasnips", vim.log.levels.INFO)
 else
   vim.notify("luasnips: something went terribly wrong", vim.log.levels.ERROR)
-	return
+  return
 end
 local types = require "luasnip.util.types"
 
@@ -133,29 +133,40 @@ luasnip.add_snippets("lua", {
   snippet("newsnip", fmt([[
     snippet("{}", fmt([[
       {}
-    ]].."]]"..[[,
-    {{
-      {}
-    }})),]], { 
+    ]] .. "]]" .. [[,
+      {{
+        {}
+      }})),]], {
     i(1, "snip name"),
     i(2, "snip body"),
-    i(3, "nodes") 
+    i(3, "nodes")
   })),
   snippet("?:", fmt([[
     ({}) ? {} : {};
   ]],
-  {
-    i(1, "condition"),
-    i(2, "then"),
-    i(3, "else")
-  })),
+    {
+      i(1, "condition"),
+      i(2, "then"),
+      i(3, "else")
+    })),
+  snippet("fun", fmt([[
+    {}{} =  function({})
+      {}
+    end
+  ]],
+    {
+      c(1, { t("local "), t("") }),
+      i(2, "name"),
+      i(3, "args"),
+      i(4, "body"),
+    })),
 })
 
 luasnip.add_snippets("c", {
-  snippet({ trig="matrix", wordTrig=false }, fmt([[
+  snippet({ trig = "matrix", wordTrig = false }, fmt([[
     idk {}
   ]],
-  {
-    i(1, "it's the only node I know how to use."),
-  })),
+    {
+      i(1, "it's the only node I know how to use."),
+    })),
 })

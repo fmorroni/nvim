@@ -1,5 +1,6 @@
 -- Shorten function name
 local keymap = vim.keymap.set
+local unmap = vim.keymap.del
 -- Silent keymap option
 local opts = { silent = true }
 
@@ -26,6 +27,7 @@ keymap({"n", "i"}, ",;", "<ESC>A;<ESC>", opts)
 keymap("i", ",z", "<", opts)
 keymap("i", ",Z", ">", opts)
 keymap("i", ",,", "<ESC>", opts)
+keymap("n", "<leader><leader>x", "<CMD>write<CR><CMD>source %<CR>", opts) -- Resource current file.
 
 -- Normal --
 -- Better window navigation
@@ -52,6 +54,7 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)
+keymap("s", "p", "p", opts) -- Lets p get inserted as p in select-mode instead of acting as paste.
 
 -- Insert --
 -- Press jk fast to enter
