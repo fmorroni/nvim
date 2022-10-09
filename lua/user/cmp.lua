@@ -1,6 +1,6 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if cmp_status_ok then
-  vim.notify("Everything A-Okay at cmp.lua", vim.log.levels.INFO)
+  -- vim.notify("Everything A-Okay at cmp.lua", vim.log.levels.INFO)
 else
   vim.notify("cmp.lua: something went terribly wrong", vim.log.levels.ERROR)
   return

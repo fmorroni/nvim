@@ -11,7 +11,7 @@ local types = require "luasnip.util.types"
 
 luasnip.config.set_config {
   -- This tells LuaSnip to remember to keep around the last snippet.
-  -- You can jump back into it even if you move outside of the selection
+  -- You can jump back into it even if you move outside of the selection.
   history = true,
 
   -- This one is cool cause if you have dynamic snippets, it updates as you type!
@@ -19,6 +19,10 @@ luasnip.config.set_config {
 
   -- Autosnippets:
   enable_autosnippets = false,
+
+  -- Deletion is buggy without this.
+  region_check_events = "InsertEnter",
+  delete_check_events = "TextChanged,InsertLeave",
 
   -- Crazy highlights!!
   -- #vid3
@@ -67,20 +71,23 @@ end)
 -- keymap("i", "<c-u>", require "luasnip.extras.select_choice")
 
 -- shorcut to source my luasnips file again, which will reload my snippets
-keymap("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<CR>")
+-- keymap("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<CR>")
 
 -- Run after modifying already sourced snippets. Resource luasnip.lua after cleanup.
-keymap("n", "<leader><leader>c", function()
+keymap("n", "<leader><leader>s", function()
   luasnip.cleanup()
+  vim.cmd("source ~/.config/nvim/lua/user/luasnip.lua")
+  vim.notify("Luasnips was reasourced.")
 end)
 
 ---- create snippet ----
 -- s(context, nodes, condition, ...)
-local snippet = luasnip.s
+local snippet = luasnip.snippet
 
 -- TODO: Write about this.
 --  Useful for dynamic nodes and choice nodes
-local snippet_from_nodes = luasnip.sn
+local sn = luasnip.snippet_node
+local isn = luasnip.indent_snippet_node
 
 -- This is the simplest node.
 --  Creates a new text node. Places cursor after node by default.
@@ -142,7 +149,7 @@ luasnip.add_snippets("lua", {
     i(3, "nodes")
   })),
   snippet("?:", fmt([[
-    ({}) ? {} : {};
+    ({}) and {} or {};
   ]],
     {
       i(1, "condition"),
@@ -162,11 +169,53 @@ luasnip.add_snippets("lua", {
     })),
 })
 
+
 luasnip.add_snippets("c", {
-  snippet({ trig = "matrix", wordTrig = false }, fmt([[
-    idk {}
+  snippet("?:", fmt([[
+    ({}) ? {} : {};
   ]],
     {
-      i(1, "it's the only node I know how to use."),
+      i(1, "condition"),
+      i(2, "then"),
+      i(3, "else")
+    })),
+  snippet({ trig = "matrix" }, fmt([[
+    {} {}[{}][{}] = {{
+      {}
+    }};
+  ]],
+    {
+      c(1, { t("int"), t("char") }),
+      i(2, "varName"),
+      i(3, "1"),
+      i(4, "1"),
+      d(5, function(args)
+        local rows = tonumber(args[2][1])
+        local cols = tonumber(args[3][1])
+        local placeholder = (args[1][1] == "int") and "1" or "A";
+        local mat = {}
+        local index = 1
+        for row = 1, rows, 1 do
+          table.insert(mat, t("{"))
+          for col = 1, cols, 1 do
+            if placeholder == "1" then
+              table.insert(mat, i(index, placeholder))
+            else
+              table.insert(mat, sn(index, { t("'"), i(1, placeholder), t("'") }))
+              -- table.insert(mat, i(index, placeholder))
+              -- table.insert(mat, t("'"))
+            end
+            if col < cols then table.insert(mat, t(", ")) end
+            index = index + 1
+          end
+          if row < rows then
+            table.insert(mat, t({ "},", "" }))
+          else
+            table.insert(mat, t({ "}" }))
+          end
+        end
+        P(mat)
+        return isn(1, mat, "  $PARENT_INDENT")
+      end, { 1, 3, 4 }),
     })),
 })

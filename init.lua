@@ -1,3 +1,4 @@
+require "user.globals"
 require "user.options" -- This will implicitly load lua/user/options.lua
 require "user.keymaps"
 require "user.plugins"
@@ -20,5 +21,4 @@ require "user.indentline"
 require "user.alpha"
 require "user.lsp" -- This will implicitly look for init.lua inside of lua/user/lsp
 require "user.dap"
-require "user.luasnip"
-require "user.globals"
+require "user.luasnip_config"
