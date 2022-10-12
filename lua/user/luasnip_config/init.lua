@@ -39,7 +39,7 @@ keymap({ "i", "s" }, "<c-j>", function()
   end
 end, { silent = true })
 
-keymap("i", "<c-l>", function()
+keymap({ "i", "s" }, "<c-l>", function()
   if luasnip.choice_active() then
     luasnip.change_choice(1)
   end
@@ -56,4 +56,4 @@ keymap("n", "<leader><leader>s", function()
   vim.notify("Luasnips was reasourced.")
 end)
 
-require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/lua/user/luasnip_config/snippets"})
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/user/luasnip_config/snippets" })
