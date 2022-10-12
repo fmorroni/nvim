@@ -15,17 +15,43 @@ local ai = require("luasnip.nodes.absolute_indexer")
 
 local newsnip = s("newsnip", fmt([[
     local {} = s("{}", fmt([[
-      {}
-    ]] .. "]]" .. [[,
+        {}
+    ]]
+.. "  ]]" .. [[,
       {{
         {}
-      }})),]],
+      }}))]],
   {
     i(1, "var"),
-    i(2, "snip name"),
+    c(2, { rep(1), i(1) }),
     i(3, "snip body"),
-    i(4, "nodes")
+    d(4, function(args)
+      local snipBodyArgs = table.concat(args[1])
+      local nodes = {}
+      local keys = {}
+      local snipBodyArgCount = 0
+      for match in snipBodyArgs:gmatch("{([^{}]*)}") do
+        snipBodyArgCount = snipBodyArgCount + 1
+        table.insert(keys, match)
+      end
+      for j, key in ipairs(keys) do
+        local node = {}
+        if key ~= "" then
+          table.insert(node, t(key .. " = "))
+        end
+        table.insert(node, i(1, "node_" .. j))
+        if j < snipBodyArgCount then
+          table.insert(node, t({",", ""}))
+        else
+          table.insert(node, t(","))
+        end
+        table.insert(nodes, isn(j, node, "    $PARENT_INDENT"))
+      end
+
+      return sn(1, nodes)
+    end, 3),
   }))
+
 local ternary = s("?:", fmt([[
     ({}) and {} or {}
   ]],
@@ -34,6 +60,7 @@ local ternary = s("?:", fmt([[
     i(2, "then"),
     i(3, "else")
   }))
+
 local fun = s("fun", fmt([[
     {}{} =  function({})
       {}

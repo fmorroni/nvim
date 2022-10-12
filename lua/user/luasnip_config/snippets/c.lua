@@ -62,7 +62,34 @@ local matrix = s({ trig = "matrix" }, fmt([[
     end, { 1, 3, 4 }),
   }))
 
+local printf = s("pf", fmt([[
+    printf("{string}{newlineChoice}"{arguments});
+  ]],
+  {
+    string = i(1),
+    newlineChoice = c(2, { t("\\n"), t("") }),
+    arguments = d(3, function(args)
+      local string = table.concat(args[1]):gsub("%%%%", "")
+      local argCount = 0
+      local keys = {}
+      for match in string:gmatch("%%[^%% ]-([a-zA-Z][a-zA-Z]?)") do
+        argCount = argCount + 1
+        table.insert(keys, match)
+      end
+      local nodes = {}
+      for j, key in ipairs(keys) do
+        table.insert(nodes, t(", "))
+        table.insert(nodes, i(j, key))
+        if j < argCount then
+          table.insert(nodes, t(", "))
+        end
+      end
+      return sn(1, nodes)
+    end, 1),
+  }))
+
 return {
   ternary,
   matrix,
+  printf,
 }
