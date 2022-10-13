@@ -69,6 +69,7 @@ local printf = s("pf", fmt([[
     string = i(1),
     newlineChoice = c(2, { t("\\n"), t("") }),
     arguments = d(3, function(args)
+      local nodes = {}
       local string = table.concat(args[1]):gsub("%%%%", "")
       local argCount = 0
       local keys = {}
@@ -76,9 +77,10 @@ local printf = s("pf", fmt([[
         argCount = argCount + 1
         table.insert(keys, match)
       end
-      local nodes = {}
-      for j, key in ipairs(keys) do
+      if argCount > 0 then
         table.insert(nodes, t(", "))
+      end
+      for j, key in ipairs(keys) do
         table.insert(nodes, i(j, key))
         if j < argCount then
           table.insert(nodes, t(", "))
