@@ -21,6 +21,16 @@ local ternary = s("?:", fmt([[
     i(3, "else")
   }))
 
+local include = s("inc", fmt([[
+    #include {}
+  ]],
+  {
+    c(1, {
+      sn(nil, { t("<"), i(1), t(">") }),
+      sn(nil, { t("\""), i(1), t("\"") }),
+    })
+  }))
+
 local matrix = s({ trig = "matrix" }, fmt([[
     {} {}[{}][{}] = {{
       {}
@@ -90,8 +100,31 @@ local printf = s("pf", fmt([[
     end, 1),
   }))
 
+local functionSnip = s("fun", fmt([[
+    {type} {functionName}({args}) {{
+      {body}{}
+    }}
+  ]],
+  {
+    type = i(1, "type"),
+    functionName = i(2, "name"),
+    args = i(3, "args..."),
+    body = i(4),
+    d(5, function(args)
+      local node
+      if args[1][1] ~= "void" then
+        node = sn(nil, { t({ "", "", "  return " }), i(1, args[1][1]), t(";") })
+      else
+        node = sn(nil, t(""))
+      end
+      return node
+    end, 1),
+  }))
+
 return {
   ternary,
+  include,
   matrix,
   printf,
+  functionSnip,
 }

@@ -23,7 +23,9 @@ local newsnip = s("newsnip", fmt([[
       }}))]],
   {
     i(1, "var"),
-    c(2, { rep(1), i(1) }),
+    d(2, function(args)
+      return sn(1, i(1, args[1][1]))
+    end, 1),
     i(3, "snip body"),
     d(4, function(args)
       local snipBodyArgs = table.concat(args[1])
