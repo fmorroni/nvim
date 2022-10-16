@@ -23,7 +23,7 @@ keymap("v", "<tab>", ">gv", opts)
 keymap("v", "<s-tab>", "<gv", opts)
 keymap("n", "<leader>o", "o<ESC>", opts)
 keymap("n", "<leader>O", "O<ESC>", opts)
-keymap({"n", "i"}, ",;", "<ESC>A;<ESC>", opts)
+keymap({ "n", "i" }, ",;", "<ESC>A;<ESC>", opts)
 keymap("i", ",z", "<", opts)
 keymap("i", ",Z", ">", opts)
 keymap("i", ",,", "<ESC>", opts)
@@ -77,9 +77,9 @@ keymap("n", "<leader>ftf", ":Telescope grep_string search=<CR>", opts) -- Find T
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts) -- Find Projects
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts) -- Find Buffer
 keymap("n", "<leader>th", ":Telescope help_tags<CR>", opts) -- Open help search
+keymap("n", "gr", ":Telescope lsp_references<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 
 -- Comment
