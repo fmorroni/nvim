@@ -17,7 +17,7 @@ local newsnip = s("newsnip", fmt([[
     local {} = s("{}", fmt([[
         {}
     ]]
-.. "  ]]" .. [[,
+  .. "  ]]" .. [[,
       {{
         {}
       }}))]],
@@ -43,7 +43,7 @@ local newsnip = s("newsnip", fmt([[
         end
         table.insert(node, i(1, "node_" .. j))
         if j < snipBodyArgCount then
-          table.insert(node, t({",", ""}))
+          table.insert(node, t({ ",", "" }))
         else
           table.insert(node, t(","))
         end
@@ -64,15 +64,18 @@ local ternary = s("?:", fmt([[
   }))
 
 local fun = s("fun", fmt([[
-    {}{} =  function({})
+    {}function({})
       {}
     end
   ]],
   {
-    c(1, { t("local "), t("") }),
-    i(2, "name"),
-    i(3, "args"),
-    i(4, "body"),
+    c(1, {
+      t(""),
+      sn(nil, { t("local "), i(1, 'name'), t(" = ") }),
+      sn(nil, { i(1, 'name'), t(" = ") }),
+    }),
+    i(2, "args"),
+    i(3, "body"),
   }))
 
 return {
