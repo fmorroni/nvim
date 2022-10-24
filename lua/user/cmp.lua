@@ -56,7 +56,13 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ["<C-k>"] = cmp.mapping(function()
       if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+        local tsUtils = require('nvim-treesitter.ts_utils')
+        local nodeType = tsUtils.get_node_at_cursor():type()
+        if nodeType ~= 'string' and nodeType ~= 'assignment_statement' then
+          luasnip.expand_or_jump()
+        else
+          luasnip.jump(1)
+        end
       else
         cmp.select_next_item()
       end
