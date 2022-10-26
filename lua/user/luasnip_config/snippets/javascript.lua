@@ -35,7 +35,21 @@ local ifStatement = s("if", fmt([[
     i(2),
   }))
 
+local tryCatch = s("try", fmt([[
+    try {{
+      {}
+    }} catch({}) {{
+      {}
+    }}
+  ]],
+  {
+    i(1),
+    i(2, 'err'),
+    i(3),
+  }))
+
 return {
   import,
   ifStatement,
+  tryCatch,
 }
