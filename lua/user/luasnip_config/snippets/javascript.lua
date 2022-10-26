@@ -14,7 +14,10 @@ local rep = require("luasnip.extras").rep
 
 local function defExport(args)
   local default = string.match(args[1][1], "(%a*).?%a*$")
-  return sn(nil, c(1, { sn(nil, { t("{ "), i(1), t(" }") }), i(nil, default)}))
+  return sn(nil, c(1, {
+    sn(nil, { t("{ "), i(1), t(" }") }),
+    i(nil, default),
+  }))
 end
 
 local import = s("import", fmt([[
@@ -48,8 +51,29 @@ local tryCatch = s("try", fmt([[
     i(3),
   }))
 
+local forStatement = s("for", fmt([[
+    for ({}) {{
+      {}
+    }}
+  ]],
+  {
+    c(1, {
+      sn(nil, {
+        i(1), -- Needed to be able to switch to the other sn().
+        t("const "),
+        c(2, {
+          sn(nil, { i(1, "ele"), t(" of "), i(2, "iterable") }),
+          sn(nil, { i(1, "key"), t(" in "), i(2, "obj") }),
+        }),
+      }),
+      sn(nil, fmt("let {} = 0; {} < {}.length; ++{}", { i(1, "i"), rep(1), i(2, "array"), rep(1) })),
+    }),
+    i(2),
+  }))
+
 return {
   import,
   ifStatement,
   tryCatch,
+  forStatement,
 }
