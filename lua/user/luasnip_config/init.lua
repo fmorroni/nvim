@@ -16,7 +16,7 @@ luasnip.config.set_config {
   updateevents = "TextChanged,TextChangedI",
 
   -- Autosnippets:
-  enable_autosnippets = false,
+  enable_autosnippets = true,
 
   -- Deletion is buggy without this.
   region_check_events = "InsertEnter",
