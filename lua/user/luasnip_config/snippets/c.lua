@@ -121,10 +121,22 @@ local functionSnip = s("fun", fmt([[
     end, 1),
   }))
 
+local struct = s("struct", fmt([[
+    typedef struct {} {{
+      {}
+    }} {};
+  ]],
+  {
+    i(1, "StructName"),
+    i(2),
+    rep(1),
+  }))
+
 return {
   ternary,
   include,
   matrix,
   printf,
   functionSnip,
+  struct,
 }
