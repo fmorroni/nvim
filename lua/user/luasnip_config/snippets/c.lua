@@ -132,11 +132,41 @@ local struct = s("struct", fmt([[
     rep(1),
   }))
 
+local main = s("main", fmt([[
+    int main() {{
+      {}
+
+      return 0;
+    }}
+  ]],
+  {
+    i(1),
+  }))
+
+local forStatement = s("for", fmt([[
+    for (int {} = {}; {} < {}; {}) {{
+      {}
+    }}
+  ]],
+  {
+    i(1, "i"),
+    i(2, "0"),
+    rep(1),
+    i(3, "len"),
+    d(4, function(args)
+      return sn(nil, i(1, "++"..args[1][1]))
+    end, 1),
+    i(5),
+  }))
+
 return {
   ternary,
-  include,
   matrix,
   printf,
   functionSnip,
   struct,
+  forStatement,
+}, {
+  include,
+  main,
 }
