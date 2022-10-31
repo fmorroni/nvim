@@ -154,9 +154,29 @@ local forStatement = s("for", fmt([[
     rep(1),
     i(3, "len"),
     d(4, function(args)
-      return sn(nil, i(1, "++"..args[1][1]))
+      return sn(nil, i(1, "++" .. args[1][1]))
     end, 1),
     i(5),
+  }))
+
+local whileStatement = s("while", fmt([[
+    while ({}) {{
+      {}
+    }}
+  ]],
+  {
+    i(1, "condition"),
+    i(2),
+  }))
+
+local ifStatement = s("if", fmt([[
+    if ({}) {{
+      {}
+    }}
+  ]],
+  {
+    i(1, "condition"),
+    i(2),
   }))
 
 return {
@@ -166,6 +186,8 @@ return {
   functionSnip,
   struct,
   forStatement,
+  whileStatement,
+  ifStatement,
 }, {
   include,
   main,
