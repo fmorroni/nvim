@@ -36,6 +36,10 @@ keymap("n", "<leader><leader>x", "<CMD>write<CR><CMD>source %<CR>", opts) -- Res
 -- keymap("n", "<C-k>", "<C-w>k", opts)
 -- keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Make j and k treat wrapped lines as separate lines
+keymap("n", "j", "gj", opts)
+keymap("n", "k", "gk", opts)
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
