@@ -28,6 +28,7 @@ keymap("i", ",z", "<", opts)
 keymap("i", ",Z", ">", opts)
 keymap("i", ",,", "<ESC>", opts)
 keymap("n", "<leader><leader>x", "<CMD>write<CR><CMD>source %<CR>", opts) -- Resource current file.
+keymap("n", "|", "$", opts)
 
 -- Normal --
 -- Better window navigation
