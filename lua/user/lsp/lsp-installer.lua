@@ -7,6 +7,7 @@ local servers = {
   "sumneko_lua",
   "tsserver",
   "clangd",
+  "html",
 }
 
 lsp_installer.setup()
