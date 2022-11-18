@@ -71,9 +71,19 @@ local forStatement = s("for", fmt([[
     i(2),
   }))
 
+local ternary = s("?:", fmt([[
+    ({}) ? {} : {};
+  ]],
+  {
+    i(1, "condition"),
+    i(2, "then"),
+    i(3, "else")
+  }))
+
 return {
   import,
   ifStatement,
   tryCatch,
   forStatement,
+  ternary,
 }
