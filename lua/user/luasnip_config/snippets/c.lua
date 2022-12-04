@@ -179,6 +179,20 @@ local ifStatement = s("if", fmt([[
     i(2),
   }))
 
+local guard = s("guard", fmt([[
+    #ifndef {}
+    #define {}
+
+    {}
+
+    #endif
+  ]],
+  {
+    i(1),
+    rep(1),
+    i(2),
+  }))
+
 return {
   ternary,
   matrix,
@@ -188,6 +202,7 @@ return {
   forStatement,
   whileStatement,
   ifStatement,
+  guard,
 }, {
   include,
   main,
