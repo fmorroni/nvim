@@ -57,7 +57,8 @@ cmp.setup({
     ["<C-k>"] = cmp.mapping(function()
       if luasnip.expand_or_jumpable() then
         local tsUtils = require('nvim-treesitter.ts_utils')
-        local nodeType = tsUtils.get_node_at_cursor():type()
+        local node = tsUtils.get_node_at_cursor()
+        local nodeType = (node ~= nil) and node:type() or ''
         if nodeType ~= 'string' and nodeType ~= 'assignment_statement' then
           luasnip.expand_or_jump()
         else
