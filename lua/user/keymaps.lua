@@ -77,15 +77,6 @@ keymap("v", ">", ">gv", opts)
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
--- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts) -- Find Files
-keymap("n", "<leader>ftr", ":Telescope live_grep<CR>", opts) -- Find Text Regex
-keymap("n", "<leader>ftf", ":Telescope grep_string search=<CR>", opts) -- Find Text Fuzzy
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts) -- Find Projects
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts) -- Find Buffer
-keymap("n", "<leader>th", ":Telescope help_tags<CR>", opts) -- Open help search
-keymap("n", "gr", ":Telescope lsp_references<CR>", opts)
-
 -- Git
 keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 
