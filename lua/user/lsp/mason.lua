@@ -3,6 +3,8 @@ local servers = {
 	"tsserver",
   "clangd",
   "html",
+  "cssls",
+  "vuels",
 }
 
 local settings = {

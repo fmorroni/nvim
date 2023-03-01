@@ -202,8 +202,7 @@ return {
   forStatement,
   whileStatement,
   ifStatement,
-  guard,
-}, {
   include,
   main,
+  guard,
 }
